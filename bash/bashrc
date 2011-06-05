@@ -1,0 +1,186 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# don't put duplicate lines in the history. See bash(1) for more options
+export HISTCONTROL=ignoreboth
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+xterm-color)
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    ;;
+*)
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    ;;
+esac
+
+# Comment in the above and uncomment this below for a color prompt
+#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ "$TERM" != "dumb" ]; then
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+    #alias dir='ls --color=auto --format=vertical'
+    #alias vdir='ls --color=auto --format=long'
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+######################################################################################
+############################### Fabians Kram #########################################
+######################################################################################
+
+# Befehle immer nur an die history anhängen
+shopt -s histappend
+# .bash_history nach jedem Befehl updaten
+PROMPT_COMMAND='history -a'
+
+# bei cd Pfade auto-korrigieren
+shopt -s cdspell
+
+# Größe der .bash_history festlegen
+HISTFILESIZE=1000000000
+HISTSIZE=1000000
+
+# Zeit in der History mit anzeigen
+export HISTTIMEFORMAT='%F %T '
+
+# Befehle mit einem Leerzeichen am Anfang nicht in der History speichern
+export HISTCONTROL=ignorespace
+
+# export GREP_OPTIONS="--color=auto"
+
+
+function prompt {
+	local COLOR_NORMAL="\[\033[0m\]"
+	local COLOR_PATH="\[\033[1;30m\]"
+	
+	if [ "$USER" = "root" ]; then
+		local COLOR_USER="\[\033[0;31m\]" # root: Benutzername rot
+	else
+		local COLOR_USER="\[\033[0;37m\]" # sonst: Benutzername hellgrau
+	fi
+
+	HOST="$(hostname)"
+	if [ "$HOST" == "null" ] || [ "$HOST" == "eins" ] || [ "$HOST" == "euphrat" ] || [ "$HOST" == "tigris" ]; then
+		if [ -n "$SSH_CONNECTION" ]; then 	#per SSH eingeloggt
+			local COLOR_HOST="\[\033[1;35m\]" # Host in Lila anzeigen
+		else					#lokal eingeloggt
+			local COLOR_HOST="\[\033[0;37m\]" # Host in hellgrau anzeigen
+		fi
+	fi
+
+	case $HOST in
+		fsinfo)			local COLOR_HOST="\[\033[0;36m\]" ;;	# Host in Cyan anzeigen
+		fsinfo-ersatz)		local COLOR_HOST="\[\033[0;36m\]" ;;
+		
+		amazonas)		local COLOR_HOST="\[\033[0;32m\]" ;;	# Host in Grün anzeigen
+
+		hetzner)		local COLOR_HOST="\[\033[0;31m\]" ;;	# Host in Rot anzeigen
+		debian3142-lamp)	local COLOR_HOST="\[\033[0;31m\]" ;;
+	esac
+
+	PS1="[$COLOR_USER\\u@$COLOR_HOST\\h$COLOR_PATH:\$PWD$COLOR_NORMAL] "
+}
+
+function prompt_new {
+    local COL_LIGHT_GREY="\[\033[0;37m\]"
+    local COL_BLACK="\[\033[0;30m\]"
+    local COL_DARK_GREY="\[\033[1;30m\]"
+    local COL_WHITE="\[\033[1;37m\]"
+    local COL_NORMAL="\[\033[0m\]"
+    local COL_RED="\[\033[0;31m\]"
+    local COL_GREEN="\[\033[01;32m\]"
+    local COL_BLUE="\[\033[1;34m\]"
+    local COL_LIGHT_BLUE="\[\033[0;34m\]"
+
+    shopt -s checkwinsize
+    host=$( hostname -s )
+    name=$( id -un )
+    if [ "$name" == "root" ]; then
+        ID=$COL_RED$name
+    else
+        ID=$COL_GREEN$name
+    fi
+    ID=$ID$COL_DARK_GREY'@'
+    ID=$ID$host
+    
+    i=0
+    x=''
+
+    # Syntax:
+    # /- <PWD> ---...--- <USER>@<HOST> -
+
+    # PS1="\n"
+    # PS1="${PS1}${COL_DARK_GREY}┌─ ${COL_WHITE}\$PWD ${COL_DARK_GREY}$x $ID ${COL_DARK_GREY}─\n"
+    # PS1="${PS1}└─${COL_WHITE}${COL_NORMAL} "
+
+    # PS1="${COL_DARK_GREY}\n"
+    # PS1="${PS1}┌\$( spaces )\n"
+    # PS1="${PS1}| \$PWD - $ID\n"
+    # PS1="${PS1}└ ${COL_NORMAL}"
+
+    GIT_PS1_SHOWDIRTYSTATE=true
+    GIT_PS1_SHOWUNTRACKEDFILES=true
+    PS1="\n$ID${COL_BLUE} \$PWD\[\033[0;31m\]"'$(__git_ps1 " (%s)")'" ${COL_LIGHT_BLUE}$ ${COL_NORMAL}"
+}
+
+
+function spaces() {
+    x=1
+    s=''
+    while [ $x -lt $COLUMNS ]; do
+        s=${s}-
+        x=$(( $x + 1 ))
+    done
+    echo $s
+}
+
+prompt_new
+
+if [ -e ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+PATH=$PATH:/sbin:/home/fabian/scripts
+
+#####
+# Bash Completion rules
+#####
+# VLC: mkv, avi, mpg, mp2, mp3, mpeg, ogg, flv
+complete -f -X '!*.@([mM][kK][vV]|[aA][vV][iI]|[mM][pP][gG23]|[mM][pP][eE][gG]|[oO][gG][gG]|[fF][lL][vV]|[xX][sS][pP][fF]|[aA][cC]3|[dD][tT][sS]|[iI][sS][oO])' vlc
+
+if [ -e ~/.bc/extensions.bc ]; then
+    export BC_ENV_ARGS='-q -l /home/fabian/.bc/extensions.bc'
+fi

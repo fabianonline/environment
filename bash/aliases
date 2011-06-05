@@ -1,0 +1,39 @@
+
+alias am='ssh amazonas'
+alias scr='screen -D -RR fabian'
+alias rmff='rm ~/.mozilla/firefox/*.*/.parentlock'
+alias rmtb='rm ~/.mozilla-thunderbird/*.*/.parentlock'
+alias bzflag='bzflag -window -geometry 1680x1050'
+
+alias mp3_gain='mp3gain -r -c -d 9'
+alias eagle='XLIB_SKIP_ARGB_VISUALS=1 ~/bin/eagle-lin-ger-4.16r2/bin/eagle'
+#alias josm='java -jar /home/fabian/bin/josm/josm-latest.jar'
+
+alias syn_server='synergys --no-daemon --config ~/synergy.conf'
+
+
+alias wsdl2java='java -cp ~/bin/axis-1_4/lib org.apache.axis.wsdl.WSDL2Java'
+alias eclipse='/home/fabian/dev/eclipse/eclipse -vmargs -Xms40M -Xmx768M -XX:PermSize=64M -XX:MaxPermSize=128M'
+
+alias eclipse="'/home/fabian/dev/eclipse/eclipse' -vmargs -Xms40M -Xmx768M -XX:PermSize=64M -XX:MaxPermSize=128M &"
+alias mkpatch='diff -rupN'
+
+alias soapui="/home/fabian/bin/soapui/bin/soapui.sh"
+alias celtx="/home/fabian/bin/celtx/celtx"
+
+
+alias ls='ls --color=auto'
+alias l='ls -l'
+alias lt='l -tr'
+alias la='l -a'
+alias l.='la -d .*'
+alias ld='l $* | grep "^d"'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias stats='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
+alias rm='rm -I'
+
+alias wake_euphrat='wakeonlan -i 10.255.255.255 00:15:F2:3C:9B:ED'
+
+alias cds='cd /home/samba/share'
+alias cdn='cd /home/samba/share/nzb/fertig'

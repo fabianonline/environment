@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/var/www/rails/twatcher.dev/app/views/account'
+let g:netrw_dirhist_2='/var/www/rails/twatcher.dev/test/fixtures'
+let g:netrw_dirhist_3='/var/www/rails/rubycom.dev/.git'
+let g:netrw_dirhist_4='/usr/lib/ruby/gems/1.8/gems/jekyll-0.10.0'
+let g:netrw_dirhist_5='/var/www/jekyll/_posts'
+let g:netrw_dirhist_6='/var/www/jekyll/_layouts'

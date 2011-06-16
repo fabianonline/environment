@@ -1,16 +1,14 @@
 #!/bin/bash
-SCRIPT_NAME=$(readlink -f "$0")
-SCRIPT_PATH=$(dirname "$SCRIPT_NAME")
 
 # vim
-ln -fs $SCRIPT_PATH/vim/vimrc         ~/.vimrc
-ln -fs $SCRIPT_PATH/vim               ~/.vim
+ln -fs $PWD/vim/vimrc         ~/.vimrc
+ln -fs $PWD/vim               ~/.vim
 
 # screen
-ln -fs $SCRIPT_PATH/screen/screenrc   ~/.screenrc
+ln -fs $PWD/screen/screenrc   ~/.screenrc
 
 # bash
-ln -fs $SCRIPT_PATH/bash/bashrc       ~/.bashrc
-ln -fs $SCRIPT_PATH/bash/inputrc      ~/.inputrc
-ln -fs $SCRIPT_PATH/bash/aliases      ~/.bash_aliases
+ln -fs $PWD/bash/bashrc       ~/.bashrc
+ln -fs $PWD/bash/inputrc      ~/.inputrc
+ln -fs $PWD/bash/aliases      ~/.bash_aliases
 

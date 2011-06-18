@@ -109,6 +109,8 @@ termcapinfo xterm 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
 # ------------------------------------------------------------------------------
 # Eigener Kram
 # ------------------------------------------------------------------------------
+#xterm kann scrollen:
+termcapinfo xterm* ti@:te@
 # Statuszeile
 caption always "%{rw} * | $LOGNAME@%H | Load: %l | %{bw}%c:%s | %{-}%-Lw%{rw}%50>%{rW}%n%f* %t %{-}%+Lw%<"
 

@@ -11,7 +11,6 @@ ln -fs $PWD/screen/screenrc   ~/.screenrc
 ln -fs $PWD/bash/bashrc       ~/.bashrc
 ln -fs $PWD/bash/inputrc      ~/.inputrc
 ln -fs $PWD/bash/aliases      ~/.bash_aliases
-<<<<<<< HEAD
 
 #enable bashcomp support on gentoo
 if [ -f /usr/bin/eselect ]; then

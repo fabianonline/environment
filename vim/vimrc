@@ -5,6 +5,9 @@
 " version: 00/01/20
 " commented lines start with `"'
 
+" enable mouse
+set mouse=a
+
 " enable syntax highlighting
 syntax on
 set background=dark

@@ -8,6 +8,9 @@
 " enable mouse
 set mouse=a
 
+" enable incsearch
+set incsearch
+
 " enable syntax highlighting
 syntax on
 set background=dark

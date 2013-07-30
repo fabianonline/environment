@@ -139,13 +139,14 @@ bash_prompt() {
     local BGC="\[\033[46m\]"
     local BGW="\[\033[47m\]"
     
-    local UC=$G                 # user's color
-    [ $UID -eq "0" ] && UC=$R   # root's color
+    local UC=$EMG                 # user's color
+    local HC=$EMR                 # host's color
+    [ $UID -eq "0" ] && UC=$EMR   # root's color
     
     GIT_PS1_SHOWDIRTYSTATE=true
     GIT_PS1_SHOWUNTRACKEDFILES=true
     
-    PS1="${UC}\u@${UC}\h ${B}\${NEW_PWD}${R}"'$(__git_ps1 " (%s)")'"${G} ${UC}\\$ ${NONE}"
+    PS1="\n${UC}\u${EMK}@${HC}\h ${EMB}\${PWD}${R}"'$(__git_ps1 " (%s)")'"${EMB} \\$ ${NONE}"
     # without colors: PS1="[\u@\h \${NEW_PWD}]\\$ "
     # extra backslash in front of \$ to make bash colorize the prompt
 }

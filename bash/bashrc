@@ -145,8 +145,10 @@ bash_prompt() {
     
     GIT_PS1_SHOWDIRTYSTATE=true
     GIT_PS1_SHOWUNTRACKEDFILES=true
+
+    hash __git_ps1 > /dev/null 2>&1 && local GIT_OUTPUT='$(__git_ps1 " (%s)")'
     
-    PS1="\n${UC}\u${EMK}@${HC}\h ${EMB}\${PWD}${R}"'$(__git_ps1 " (%s)")'"${EMB} \\$ ${NONE}"
+    PS1="\n${UC}\u${EMK}@${HC}\h ${EMB}\${PWD}${R}${GIT_OUTPUT}${EMB} \\$ ${NONE}"
     # without colors: PS1="[\u@\h \${NEW_PWD}]\\$ "
     # extra backslash in front of \$ to make bash colorize the prompt
 }
